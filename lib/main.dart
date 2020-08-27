@@ -20,8 +20,8 @@ class App extends StatelessWidget {
       title: "My Pocket",
       theme: ThemeData(
         fontFamily: 'Montserrat',
-        accentColor: Colors.deepPurple,
-        primaryColor: Colors.deepPurple[600]
+        accentColor: Colors.deepPurple[500],
+        primaryColor: Colors.deepPurple[600],
       ),
       home: HomePage(),
     );
@@ -56,6 +56,10 @@ class _HomePageState extends State<HomePage> {
       _userTransactions.remove(tr);
     });
   }
+
+  List<Transaction> get _recentTransactions{
+    return _userTransactions.where((element) => element.date.isAfter(DateTime.now().subtract(Duration(days: 7)))).toList();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +67,7 @@ class _HomePageState extends State<HomePage> {
         body: SafeArea(
             child: Column(
               children: [
-                AppBarCs(AddNewTransaction),
+                AppBarCs(AddNewTransaction, _recentTransactions),
                 TransactionList(userTransactions: _userTransactions, removeHandler: RemoveTransaction,)
               ],
             )

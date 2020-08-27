@@ -11,6 +11,33 @@ class ExpenseItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
       child: Card(
+        margin: const EdgeInsets.symmetric(vertical: 5, horizontal: 8),
+        child: ListTile(
+          leading: CircleAvatar(
+            backgroundColor: Colors.deepPurple[400],
+            radius: 30,
+            child: Padding(
+              padding: EdgeInsets.all(6),
+              child: FittedBox(
+                child:  Text('\$${transaction.amount}',textAlign: TextAlign.center, style: TextStyle(letterSpacing: 1.2, fontWeight: FontWeight.bold)),
+              ),
+            )
+          ),
+          title:Text(transaction.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),) ,
+          subtitle: Text(DateFormat().add_yMMMd().format(transaction.date), style: TextStyle(color: Colors.grey[600], fontSize: 14)),
+          trailing: IconButton(
+            icon: Icon(
+              Icons.delete,
+              color: Colors.red[500],
+            ),
+            onPressed: (){
+              //removeHandler(transaction);
+            },
+          ) ,
+        ),
+      )
+
+      /* Card(
         elevation: 3,
         color: Colors.white,
         child: Padding(
@@ -19,7 +46,7 @@ class ExpenseItem extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Container(
-                child: Text('\$${transaction.amount}',textAlign: TextAlign.center, style: TextStyle(letterSpacing: 1.2, fontWeight: FontWeight.bold, color: Colors.deepPurple)),
+                child: FittedBox(child: Text('\$${transaction.amount}',textAlign: TextAlign.center, style: TextStyle(letterSpacing: 1.2, fontWeight: FontWeight.bold, color: Colors.deepPurple)),),
                 margin: EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                 width: 75,
                 decoration: BoxDecoration(
@@ -39,7 +66,9 @@ class ExpenseItem extends StatelessWidget {
               SizedBox(width: 10),
               Column(
                 children: [
-                Text(transaction.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                FittedBox(
+                   child: Text(transaction.title, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                ),
                 Text(DateFormat().add_yMMMd().format(transaction.date), style: TextStyle(color: Colors.grey[600], fontSize: 14)),
               ],
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,7 +86,7 @@ class ExpenseItem extends StatelessWidget {
             ],
           ),
         ),
-      ),
+      ),*/
     );
   }
 }

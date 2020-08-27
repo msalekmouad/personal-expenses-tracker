@@ -1,40 +1,53 @@
 import 'package:flutter/material.dart';
 import 'package:personal_expenses_tracker/Classes/Transaction.dart';
 import '../Clippers/AppBarClipper.dart';
+import 'expenses_chart.dart';
 
 class AppBarCs extends StatelessWidget {
   final Function addHandler;
-  AppBarCs(this.addHandler);
+  final List<Transaction> transactions;
+  AppBarCs(this.addHandler, this.transactions);
 
   @override
   Widget build(BuildContext context) {
-    return ClipPath(
-      clipper: AppBarClipper(),
-      child: Container(
-          padding: EdgeInsets.all(20),
-          height: 200,
-          decoration: BoxDecoration(
-            color: Colors.deepPurple[600],
+    return Stack(
+      overflow: Overflow.visible,
+      children: [
+        Container(
+            padding: EdgeInsets.all(20),
+            height: 150,
+            decoration: BoxDecoration(
+              color: Colors.deepPurple[600],
+            ),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "My Pocket",
+                      style: TextStyle(
+                          fontSize: 22,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontFamily: 'Montserrat'
+                      ),
+                    ),
+                    FormPopUpButton(addHandler)
+                  ],
+                ),
+              ],
+            )),
+        Positioned(
+          child: Padding(
+            child: ExpensesChart(transactions),
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 15),
           ),
-          child: Column(
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "My Pocket",
-                    style: TextStyle(
-                        fontSize: 22,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
-                        fontFamily: 'Montserrat'),
-                  ),
-                  FormPopUpButton(addHandler)
-                ],
-              ),
-              //ExpensesChart()
-            ],
-          )),
+          bottom: -60,
+          left: 0,
+          right: 0,
+        )
+      ],
     );
   }
 }

@@ -4,10 +4,14 @@ import 'package:personal_expenses_tracker/Classes/Transaction.dart';
 
 class ExpenseItem extends StatelessWidget {
   final Transaction transaction;
-  ExpenseItem(this.transaction);
+  final Function removeItem;
+  ExpenseItem(this.transaction, this.removeItem);
 
   @override
   Widget build(BuildContext context) {
+    var size = MediaQuery.of(context).size;
+    var orientation = MediaQuery.of(context).orientation;
+
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 6),
       child: Card(
@@ -31,7 +35,7 @@ class ExpenseItem extends StatelessWidget {
               color: Colors.red[500],
             ),
             onPressed: (){
-              //removeHandler(transaction);
+              removeItem(transaction);
             },
           ) ,
         ),

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expenses_tracker/Classes/Transaction.dart';
@@ -5,6 +6,7 @@ import 'package:personal_expenses_tracker/Widgets/chart_bar.dart';
 
 class ExpensesChart extends StatelessWidget {
   final List<Transaction> recentTransactions;
+
   ExpensesChart(this.recentTransactions);
 
   List<Map<String, Object>> get groupedTransactionValues{
@@ -32,10 +34,13 @@ class ExpensesChart extends StatelessWidget {
   }
   @override
   Widget build(BuildContext context) {
+    var orientation = MediaQuery.of(context).orientation;
+    var size = MediaQuery.of(context).size;
+
     return Card(
       child: recentTransactions.isEmpty ? Container(
         width: MediaQuery.of(context).size.width,
-        height: 120,
+        height: orientation == Orientation.portrait ? 120 : size.height * 0.30,
         padding: EdgeInsets.all(30),
         child: Center(
           child: Text("Sorry no recent transactions", style: TextStyle(
@@ -44,11 +49,11 @@ class ExpensesChart extends StatelessWidget {
         ),
       ) : Container(
         margin: EdgeInsets.all(10),
-        height: 100,
+        height: orientation == Orientation.portrait ? 110 : size.height * 0.50,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: groupedTransactionValues.map((value) => Flexible(
-            child: ChartBar(value['day'], value['amount'], (value['amount'] as double)/maxSpending),
+            child: ChartBar(value['day'], value['amount'], (value['amount'] as double)/maxSpending, orientation == Orientation.portrait ? 110 : size.height * 0.50),
             fit: FlexFit.tight,
           )).toList(),
         ),

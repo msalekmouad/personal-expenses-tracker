@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:personal_expenses_tracker/Classes/Transaction.dart';
-import 'expenses_chart.dart';
 
 class FormPopUpButton extends StatefulWidget {
   final Function addHandler;
@@ -17,7 +16,7 @@ class _FormPopUpButtonState extends State<FormPopUpButton> {
   DateTime selectedDate;
 
   _FormPopUpButtonState(this.addHandler);
-
+  
   void _showDatePicker() {
     showDatePicker(
             context: context,
@@ -55,7 +54,7 @@ class _FormPopUpButtonState extends State<FormPopUpButton> {
                       right: 10,
                       top: 10,
                       bottom: viewInsets.bottom + 10),
-                  height: size.height * 0.9,
+                  height: size.height * 0.95,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [

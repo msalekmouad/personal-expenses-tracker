@@ -11,13 +11,12 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    var padding = MediaQuery.of(context).padding;
     var orientation = MediaQuery.of(context).orientation;
 
     return SingleChildScrollView(
       child: Container(
         height: size.height * 0.62,
-        padding: EdgeInsets.fromLTRB(15, 10, 15, 15),
+        padding: EdgeInsets.all(10),
         child: userTransactions.isEmpty
             ? Center(
                 child: Column(
@@ -28,7 +27,6 @@ class TransactionList extends StatelessWidget {
                       height: orientation == Orientation.landscape ? 80 : 200,
                     ),
                     Text('No transactions available'),
-
                   ],
                 ),
               )

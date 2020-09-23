@@ -1,28 +1,28 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChartBar extends StatelessWidget {
   final String label;
   final double amount;
   final double total;
+  final double pHeight;
 
-  ChartBar(this.label, this.amount, this.total);
+  ChartBar(this.label, this.amount, this.total, this.pHeight);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-       Container(
-         height: 20,
-         child:  FittedBox(
-           child: Text('\$${amount.toStringAsFixed(0)}'),
-         ),
-       ),
+        Container(
+          height:  pHeight * 0.10,
+          child:  FittedBox(
+            child: Text('\$${amount.toStringAsFixed(0)}', style: TextStyle(fontSize: 5),),
+          ),
+        ),
         SizedBox(
-          height: 4,
+          height: pHeight * 0.05,
         ),
         Container(
-          height: 50,
+          height:  pHeight * 0.50,
           width: 10,
           child: Stack(
             children: [
@@ -44,9 +44,14 @@ class ChartBar extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: 4,
+          height: pHeight * 0.05,
         ),
-        Text(label)
+        Container(
+          height:  pHeight * 0.10,
+          child:  FittedBox(
+            child: Text(label),
+          ),
+        )
       ],
     );
   }
